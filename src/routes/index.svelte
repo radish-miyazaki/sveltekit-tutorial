@@ -42,19 +42,19 @@
 	import customMeetupsStore from '../meetups-store';
 
 	export let meetups;
-	let loadedMeetups = [];
+
 	let unsubscribe;
 	let editMode: string;
 	let editedId: string;
 	let isLoading = false;
 	let favsOnly = false;
 
-	$: filteredMeetups = favsOnly ? loadedMeetups.filter(m => m.isFavorite) : loadedMeetups;
+	$: filteredMeetups = favsOnly ? meetups.filter(m => m.isFavorite) : meetups;
 
 	onMount(() => {
 		customMeetupsStore.setMeetups(meetups);
 		unsubscribe = customMeetupsStore.subscribe(items => {
-			loadedMeetups = items;
+			meetups = items;
 		})
 	})
 
